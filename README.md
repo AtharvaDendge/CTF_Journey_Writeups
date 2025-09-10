@@ -1,2 +1,3 @@
 # CTF-Writeups
-Writeups from CTFs, TryHackMe, HackTheBox, and real-world challenges
+My Capture The Flag (CTF) writeups from platforms like TryHackMe, HackTheBox, and competitions. 
+Includes detailed methodology, exploitation steps, and learning takeaways.
