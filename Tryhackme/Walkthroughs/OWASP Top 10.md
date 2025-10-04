@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" height="400" alt="image" src="hhttps://owasp.org/Top10/assets/TOP_10_logo_Final_Logo_Colour.png" />
+  <img width="400" height="400" alt="image" src="https://owasp.org/API-Security/editions/2019/en/images/owasp-logo.png" />
 </p>
 <h1 align="center">Room: Owasp Top 10</h1>
 
