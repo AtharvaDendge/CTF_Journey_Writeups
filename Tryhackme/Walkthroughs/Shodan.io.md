@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" alt="Shodan Logo" src="https://upload.wikimedia.org/wikipedia/commons/1/10/Shodan_logo.webp" />
+  <img width="400" alt="Shodan Logo" src="https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/blt9d7e3e67ee22e302/64f0d52f523617f7d6948984/Image_1.jpg?disable=upscale&width=1200&height=630&fit=crop" />
 </p>
 
 <h1 align="center">Room: Shodan</h1>
