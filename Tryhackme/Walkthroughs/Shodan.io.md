@@ -166,6 +166,14 @@ Filters & dorks make searches precise and impactful.
 
 Shodan Monitor & API enhance ongoing security assessments.
 
+## 👨‍💻 Author
 
+### Atharva Balasaheb Dendge
+
+•	GitHub: https://github.com/AtharvaDendge
+
+•	LinkedIn: https://www.linkedin.com/in/atharva-balasaheb-dendge/
+
+#### This write-up is created for educational and learning purposes to demonstrate OSINT methodology.
 
 
