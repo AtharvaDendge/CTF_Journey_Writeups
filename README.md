@@ -10,14 +10,13 @@ This not only reflects my problem-solving skills but also demonstrates practical
 
 ## 📂 Categories
 - 🟢 **TryHackMe**
-  {Coming Soon}
   
 
 - 🔵 **HackTheBox**
-  {Coming Soon}
+
 
 - 🏆 **Competitions**
-  {Coming Soon}
+
 
 ---
 
