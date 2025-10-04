@@ -145,26 +145,23 @@ Basic vulnerability info
 
 🧑‍💻 Task 7: Exploring the API & Conclusion
 
-Shodan’s API lets us programmatically:
+### Shodan’s API lets us programmatically:
 
-Search for IPs
+* Search for IPs
 
-Identify vulnerabilities
+* Identify vulnerabilities
 
-Monitor networks
+* Monitor networks
 
-Blog Post for further reading:
-👉 How I Hacked Your Pi-Hole
+### 🏁 Key Takeaways
 
-🏁 Key Takeaways
+* Shodan is a powerful OSINT & recon tool.
 
-Shodan is a powerful OSINT & recon tool.
+* ASN-based searches help find services across an organization’s entire network.
 
-ASN-based searches help find services across an organization’s entire network.
+* Filters & dorks make searches precise and impactful.
 
-Filters & dorks make searches precise and impactful.
-
-Shodan Monitor & API enhance ongoing security assessments.
+* Shodan Monitor & API enhance ongoing security assessments.
 
 ## 👨‍💻 Author
 
