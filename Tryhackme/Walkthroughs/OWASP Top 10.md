@@ -1,706 +1,370 @@
+# 🛡️ OWASP Top 10 — TryHackMe Room  
+
 <p align="center">
-  <img width="400" height="400" alt="image" src="https://owasp.org/API-Security/editions/2019/en/images/owasp-logo.png" />
+  <img width="200" height="200" alt="OWASP logo" src="https://owasp.org/API-Security/editions/2019/en/images/owasp-logo.png" />
 </p>
-<h1 align="center">Room: Owasp Top 10</h1>
 
-## 🏷️ Challenge Information
-- **Title**: Owasp Top 10
-- **Platform**: TryHackMe
-- **Tags**: Web Security, OWASP, Injection, Authentication, Enumeration
-- **Difficulty**: Easy
-
-________________________________________
-📝 Description
-
-Learn about and exploit each of the OWASP Top 10 vulnerabilities; the 10 most critical web security risks.
+<p align="center"><em>Practical walkthrough and notes from the OWASP Top 10 room on TryHackMe</em></p>
 
 ---
 
-📝 Overview
+## 🏷️ Challenge Information
+- **Title:** OWASP Top 10  
+- **Platform:** TryHackMe  
+- **Tags:** Web Security · OWASP · Injection · Authentication · Enumeration  
+- **Difficulty:** Easy
 
-This room covers the OWASP Top 10 vulnerabilities.
-We learn each vulnerability theoretically and then exploit it through hands-on challenges.
+---
 
-Key topics:
+## 📝 Description
+Learn about and exploit each of the OWASP Top 10 vulnerabilities — the 10 most critical web security risks — through short theory sections and hands‑on tasks.
 
-Injection & Command Injection
+---
 
-Broken Authentication
+## 📝 Overview
+This room covers the OWASP Top 10 vulnerabilities. Each module includes:
+- Short theoretical overview  
+- Hands‑on exploitation in a controlled lab  
+- Recovery of flags / artifacts  
+- Remediation recommendations
 
-Sensitive Data Exposure
+**Key topics covered:**
+- Injection & Command Injection  
+- Broken Authentication  
+- Sensitive Data Exposure  
+- XML External Entity (XXE)  
+- Broken Access Control (IDOR)  
+- Security Misconfiguration  
+- Cross‑Site Scripting (XSS)  
+- Insecure Deserialization  
+- Components with Known Vulnerabilities  
+- Insufficient Logging & Monitoring
 
-XXE
+---
 
-Broken Access Control
+## ⚙️ Environment Setup
+- **Platform:** TryHackMe  
+- **Connection:** AttackBox (browser)  
+- **Notes:** All testing performed in the provided lab environment; no external scanning outside the lab scope.
 
-Security Misconfiguration
+---
 
-XSS
+## 🔎 Enumeration
+- Explored app behavior and input handling manually.  
+- No network scanning required for initial tasks since the room provides direct URLs.  
+- Focused on how inputs affect responses and where sensitive files might be exposed.
 
-Insecure Deserialization
+---
 
-Components with Known Vulnerabilities
+## 🚀 Exploitation Walkthrough
 
-Insufficient Logging & Monitoring
+<details>
+<summary>🟣 Task 3 — Injection (Theory)</summary>
 
-⚙️ Environment Setup
+- **What it is:** User input interpreted as code/queries (SQL, OS, LDAP, etc.).  
+- **Learned:** SQL Injection vs OS Command Injection fundamentals.  
+- **Defenses:**  
+  - ✅ Input allow‑lists  
+  - ✅ Parameterized queries / prepared statements  
+  - ✅ Proper input sanitization / escaping  
 
-Platform: TryHackMe
+> *No active exploitation in this task — theory only.*
+</details>
 
-Connection: Used AttackBox in browser
+<details>
+<summary>🟣 Task 4 — OS Command Injection (Theory)</summary>
 
-All exploits were performed in a safe, controlled lab environment.
+- **Cause:** Server passes unsanitized input into system calls (`system()`, `exec`).  
+- **Risk:** Arbitrary command execution, remote shells, data exfiltration.  
+- **Mitigation:** Avoid shelling out with unsanitized input; validate and escape; use safe APIs.
+</details>
 
-🔎 Enumeration
+<details>
+<summary>🟢 Task 5 — Command Injection (Practical)</summary>
 
-Before exploiting, I explored how each vulnerability behaves.
-No scanning was required for initial tasks as the room provides direct target URLs.
+- **Target:** `http://MACHINE_IP/evilshell.php`  
+- **Behavior:** Command output is rendered in the browser (interactive).
 
-🚀 Exploitation Walkthrough
-Task 3 – Injection
-
-Injection flaws occur when user-supplied input is interpreted as commands or queries.
-
-Learned about SQL Injection and Command Injection.
-
-Defense includes using:
-
-Input allow-lists
-
-Input sanitization or stripping dangerous characters
-
-No active exploitation in this task — only theory.
-
-Task 4 – OS Command Injection
-
-Understanding Command Injection:
-
-Happens when server-side code (e.g., PHP) passes unsanitized input to system calls.
-
-Could allow attackers to execute arbitrary OS commands or even spawn a reverse shell.
-
-Task 5 – Command Injection Practical
-
-Connected to:
-http://MACHINE_IP/evilshell.php
-
-Here, active command injection was present — meaning the response of executed commands was visible in the browser.
-
-Steps & Findings:
-
+**Enumeration & commands used**
 ```
-# Enumerating
-whoami                 # Revealed user: www-data
-id                     # Confirmed privileges
-uname -a               # Revealed Ubuntu 18.04.4
-cat /usr/sbin/nologin  # Verified user's shell
-ls /                   # Found interesting file: drpepper.txt
-cat /etc/motd          # Discovered favorite beverage: Dr Pepper
+whoami                # -> www-data
+id                    # -> confirms uid/gid
+uname -a              # -> Ubuntu 18.04.4
+cat /usr/sbin/nologin # -> shows shell
+ls /                  # -> found drpepper.txt
+cat /etc/motd         # -> "Dr Pepper" (fun MOTD)
 ```
+<details>
+<summary>🟢 Task 5 — Command Injection (Practical) — Key Findings</summary>
 
-Key Answers:
+**Key findings:**
+- Strange file in `/`: `drpepper.txt`
+- Application user: `www-data`
+- User shell: `/usr/sbin/nologin`
+- OS: Ubuntu 18.04.4
+- MOTD note: Dr Pepper
+</details>
 
-Strange text file in root: drpepper.txt
+<details>
+<summary>🟠 Task 6 — Broken Authentication (Theory)</summary>
 
-Non-root/non-service/non-daemon users: 0
+**What it enables:**
+- Exploiting weak/guessable passwords
+- Abusing predictable session tokens
+- Brute‑force attacks
 
-App running as: www-data
+**Mitigations:**
+- ✅ Strong password policy
+- ✅ Account lockout / rate limiting
+- ✅ Multi-Factor Authentication (MFA)
+</details>
 
-User’s shell: /usr/sbin/nologin
+<details>
+<summary>🟠 Task 7 — Broken Authentication (Practical)</summary>
 
-OS version: Ubuntu 18.04.4
+**Vulnerability:** Registration logic failure — leading/trailing whitespace not normalized.
 
-Favorite beverage in MOTD: Dr Pepper
+**Steps:**
+- Register `darren` → “already exists”
+- Register `" darren"` (leading space) → successfully logged in as Darren
 
-Task 6 – Broken Authentication
+**Flags recovered:**
+- Darren: `fe86079416a21a3c99937fea8874b667`
+- Arthur: `d9ac0f7db4fda460ac3edeb75d75e16e`
 
-Understood how flaws in authentication mechanisms allow attackers to:
+**Remediation tip:** Normalize (trim) and validate usernames server-side; reject duplicate/ambiguous entries.
+</details>
 
-Exploit weak or guessable passwords
+<details>
+<summary>🟠 Task 8 — Sensitive Data Exposure (Intro)</summary>
 
-Abuse predictable session cookies
+**Definition:** Application unintentionally exposes sensitive data (names, DoB, passwords, CC numbers, etc.).  
 
-Perform brute-force attacks
+**Causes:** Weak/absent encryption, storage under web root, verbose errors, insecure backups.  
 
-Defenses:
+**Attack vectors:** MITM, direct download of files under web root, exposed backups.
 
-Strong password policies
 
-Lockout after failed attempts
 
-Enforcing Multi-Factor Authentication (MFA)
+🟠 Task 9 — SQLite Databases</summary>
 
-Task 7 – Broken Authentication Practical
+**Observation:** Small webapps often use SQLite (single file).  
 
-The app was vulnerable to logic flaw in registration.
+**Risk:** If the DB file is stored under web root, it can be downloaded.
 
-Steps:
-
-Tried registering username darren → “already exists”.
-
-Registered " darren" (with a leading space) → logged in successfully as Darren.
-
-Retrieved flag from Darren’s account.
-
-Flag (Darren): ``` fe86079416a21a3c99937fea8874b667 ```
-
-Repeated same technique for arthur and retrieved:
-
-Flag (Arthur): ``` d9ac0f7db4fda460ac3edeb75d75e16e ```
-
-🟠 Task 8 – Sensitive Data Exposure (Intro)
-
-When a web application unintentionally leaks sensitive data (like names, DoB, passwords, credit card numbers, etc.), it’s called Sensitive Data Exposure.
-
-Can happen due to weak encryption, or even by storing data in accessible web directories.
-
-Sometimes exploited via MITM (Man-in-the-Middle) attacks.
-
-In this challenge, the vulnerability came from improper handling of a flat-file database.
-
-🟠 Task 9 – SQLite Databases
-
-Many small webapps use SQLite flat-file databases instead of a full DB server.
-If the database file is stored under the web root, an attacker can simply download it.
-
-Basic enumeration in Kali: 
-
+**Basic SQLite enumeration:**
 ```
-sqlite3 webapp.db          # open the database
-.tables                    # list tables
-PRAGMA table_info(users);  # view schema
-SELECT * FROM users;       # dump data
-```
-🟠 Task 10 – Cracking Weak Hashes
-
-Passwords in the DB were stored as weak MD5 hashes.
-
-Used CrackStation
- to recover plaintext credentials.
-
-Example:
-Hash: 5f4dcc3b5aa765d61d8327deb882cf99 → Password: password
-
-🟠 Task 11 – Sensitive Data Exposure Challenge
-
-Steps:
-
-Explored webapp → found developer’s note pointing to /assets.
-
-Navigated to /assets → located webapp.db.
-
-Downloaded the DB and inspected using sqlite3.
-
-Found admin hash: ```6eea9b7ef19179a06954edd0f6c05ceb```
-
-Cracked hash using CrackStation → Password: qwertyuiop
-
-Logged in as admin.
-
-Flag: ```THM{Yzc2YjdkMjE5N2VjMzNhOTE3NjdiMjdl}```
-
-🔑 Lessons Learned
-
-Never store sensitive DB files under web-accessible directories.
-
-Always hash + salt passwords using strong algorithms (e.g., bcrypt, Argon2).
-
-Encrypt sensitive data at rest.
-
-Apply the principle of least privilege to files and directories.
-
-🟢 Task 12 – XML External Entity (XXE) Intro
-
-XXE abuses XML parsers to:
-
-Read local files
-
-Make SSRF requests
-
-Sometimes lead to DoS or RCE
-
-Two types:
-
-In-band: attacker gets immediate response in the app.
-
-Out-of-band (blind): attacker exfiltrates data indirectly (e.g., via external server).
-
-🟢 Task 13 – Understanding XML
-
-XML = eXtensible Markup Language
-
-Stores & transports data in a platform-independent way.
-
-Optional but recommended XML prolog: ```<?xml version="1.0" encoding="UTF-8"?>```
-
-Requires a single ROOT element.
-
-Case-sensitive and allows attributes.
-
-🟢 Task 14 – DTD (Document Type Definition)
-
-DTD defines structure & legal elements of XML.
-
-Example: 
-```
-<!DOCTYPE note [
-    <!ELEMENT note (to,from,heading,body)>
-    <!ELEMENT to (#PCDATA)>
-    <!ELEMENT from (#PCDATA)>
-    <!ELEMENT heading (#PCDATA)>
-    <!ELEMENT body (#PCDATA)>
-]>
+sqlite3 webapp.db
+.tables
+PRAGMA table_info(users);
+SELECT * FROM users;
 ```
 
-Important directives:
+<details>
+<summary>🟠 Task 10 — Cracking Weak Hashes</summary>
 
-!DOCTYPE → defines root
+**Issue:** Passwords stored as weak MD5 hashes.  
 
-!ELEMENT → defines elements
+**Approach:** Export hashes → CrackStation or hashcat/john.  
 
-!ENTITY → defines reusable values or external references
+**Example:**
+```
+MD5: 5f4dcc3b5aa765d61d8327deb882cf99 -> Password: password
+```
 
-🟢 Task 15 – XXE Payloads
+🟠 Task 11 — Sensitive Data Exposure (Practical)</summary>
 
-Basic ENTITY substitution:
+**Steps:**
+- Developer note points to `/assets`
+- Downloaded `webapp.db` → inspect via `sqlite3`
+- Found admin hash: `6eea9b7ef19179a06954edd0f6c05ceb`
+- Cracked hash → `qwertyuiop` → logged in as admin
 
+**Flag:**
+```
+THM{Yzc2YjdkMjE5N2VjMzNhOTE3NjdiMjdl}
+```
+
+<details>
+<summary>🟠 Takeaway — Sensitive Data Exposure</summary>
+
+**Key Takeaways:**
+- 🚫 Don’t place DB files under web-accessible directories  
+- 🔐 Use strong salted hashes (bcrypt / Argon2)  
+- 🗄️ Encrypt sensitive data at rest
+</details>
+
+<details>
+<summary>🟢 Task 12 — XML External Entity (XXE) Intro</summary>
+
+- **XXE:** XML External Entity — abusing XML parsers to read local files, SSRF, DoS, or RCE  
+- **Types:**  
+  - In-band (immediate response)  
+  - Out-of-band (blind)
+</details>
+
+<details>
+<summary>🟢 Task 13 — Understanding XML</summary>
+
+- Case-sensitive, requires one root element  
+- Recommended prolog:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+```
+
+
+🟢 Task 14 — DTD (Document Type Definition)</summary>
+
+- **Purpose:** Define XML structure and legal elements  
+- **Directives:** `!DOCTYPE`, `!ELEMENT`, `!ENTITY`
+
+</details>
+
+<details>
+<summary>🟢 Task 15 — XXE Payloads</summary>
+
+**Entity substitution example:**
+```
 <!DOCTYPE replace [<!ENTITY name "feast">]>
 <userInfo>
-    <firstName>falcon</firstName>
-    <lastName>&name;</lastName>
+  <firstName>falcon</firstName>
+  <lastName>&name;</lastName>
 </userInfo>
-
-
-Reading local files:
-
-<?xml version="1.0"?>
-<!DOCTYPE root [<!ENTITY read SYSTEM "file:///etc/passwd">]>
-<root>&read;</root>
-
-
-If vulnerable, app displays contents of /etc/passwd.
-
-⚠️ Key Takeaways from XXE
-
-Disable external entity resolution in XML parsers.
-
-Use libraries that automatically protect against XXE (e.g., defusedxml in Python).
-
-Sanitize & validate all XML input before parsing.
-
-🟢 Task 16 – XML External Entity (XXE) — Exploitation
-
-XXE allows an attacker to make an XML parser resolve external entities (files, URLs), disclosing local resources or injecting content.
-
-Example — verify injection (entity substitution):
-
-```
-<?xml version="1.0"?>
-<!DOCTYPE root [
-    <!ENTITY name "falcon feast">
-]>
-<root>
-    <greeting>&name;</greeting>
-</root>
 ```
 
-Example — read local file (/etc/passwd):
-```
-<?xml version="1.0"?>
-<!DOCTYPE root [
-    <!ENTITY read SYSTEM "file:///etc/passwd">
-]>
-<root>&read;</root>
-```
+🟢 Task 16 — XXE (Practical)</summary>
 
-Findings (from the VM):
+Located user falcon in /etc/passwd
 
-Username in /etc/passwd: falcon
-
-SSH key location: /home/falcon/.ssh/id_rsa
-
-First 18 chars of falcon’s private key: MIIEogIBAAKCAQEA7
+SSH key found at /home/falcon/.ssh/id_rsa (first 18 chars: MIIEogIBAAKCAQEA7)
 
 Remediation:
 
-Disable DTDs / external entity resolution in XML parsers.
+Disable DTD/external entities
 
-Use safe XML libraries / secure parsing modes.
+Validate XML input
 
-Apply input validation, least privilege for web process, and avoid exposing sensitive files.
+Run web processes with least privilege
 
-🟢 Task 17 – Broken Access Control (Concept)
+</details> <details> <summary>🟢 Task 17 — Broken Access Control</summary>
 
-Broken access control = users can access pages/resources they shouldn’t. Common causes:
+Missing server-side authorization allows access to unauthorized resources
 
-Missing server-side authorization checks
+Exploit: Force-browsing protected URLs or manipulating object IDs
 
-Force‑browsing protected URLs
+Mitigation: Server-side authorization checks, deny-by-default, RBAC
 
-Using client-side controls as the only restriction
+</details> <details> <summary>🟢 Task 18 — IDOR (Challenge)</summary>
 
-Example (force-browse):
+Pattern: Enumerate object IDs to access other users’ data
 
-http://example.com/app/admin_getappInfo   ← admin-only but accessible
+Example: http://MACHINE_IP/notes?note_id=10 → change note_id to access other notes
 
-Mitigations:
+Flag: flag{fivefourthree}
 
-Enforce authorization server-side on every request.
+Fix: Verify ownership server-side; use opaque IDs
 
-Deny-by-default, role-based access control (RBAC).
+</details> <details> <summary>🟢 Task 19 — Security Misconfiguration</summary>
 
-Log and monitor suspicious access patterns.
+Scan for admin panels → try default credentials → gain access
 
-🟢 Task 18 – IDOR (Insecure Direct Object Reference) — Challenge
+Flag: thm{4b9513968fd564a87b28aa1f9d672e17}
 
-IDOR: attacker manipulates object references (IDs) to access others’ resources.
+Fixes: Change all default credentials, remove unused services, restrict admin access
 
-Example (URL parameter enumeration):
-```
-http://MACHINE_IP/notes?note_id=10
-→ change note_id=11,12,... to access other users' notes
-```
+</details> <details> <summary>🟢 Task 20 — Cross-Site Scripting (XSS)</summary>
 
-What I did:
+Types: Reflected, Stored, DOM-based
 
-Logged in as noot / test1234
+Example flags:
 
-Enumerated note IDs and found another user’s note containing the flag
+Reflected: alert("Hello") → ThereIsMoreToXSSThanYouThink
 
-Flag:
+Stored: W3LL_D0N3_LVL2
 
-```flag{fivefourthree}```
+Page title defacement: websites_can_be_easily_defaced_with_xss
 
+Mitigation: Context-aware output encoding, CSP, HttpOnly + Secure cookies, sanitize inputs
 
-Remediation:
+</details> <details> <summary>🟢 Tasks 21-26 — Insecure Deserialization</summary>
 
-Verify resource ownership server-side before returning data.
+Risk: Deserializing untrusted data → DoS, logic tampering, RCE
 
-Use opaque/non-predictable IDs and implement strict authorization checks.
+Cookie exploitation: Change userType from user → admin
 
-🟢 Task 19 – Security Misconfiguration (Default Passwords) — Challenge
+Flags:
 
-Security misconfiguration includes leaving default credentials or services enabled.
+THM{good_old_base64_huh}
 
-Attack pattern:
+THM{heres_the_admin_flag}
 
-Scan for admin panels / services
+RCE flag: 4a69a7ff9fd68
 
-Try known default username/password pairs
+Mitigation: Sign/validate serialized data; restrict privileges
 
-Result:
+</details> <details> <summary>🟢 Tasks 27-29 — Components with Known Vulnerabilities</summary>
 
-Found service with default creds → accessed webapp → retrieved flag
+Identify software version → search exploits → adapt → execute → RCE
 
-Flag:
+Lesson: Maintain SBOM, patch promptly, isolate vulnerable components
 
-```thm{4b9513968fd564a87b28aa1f9d672e17}```
+</details> <details> <summary>🟢 Task 30 — Insufficient Logging & Monitoring</summary>
 
+Proper logging is essential for incident detection and response
 
-Remediation:
+Minimum fields: timestamp, HTTP status, username, endpoint, source IP, user-agent
 
-Change all default passwords, enforce strong password policies.
+Observed attacker IP: 49.99.13.16
 
-Disable unused services; restrict admin interfaces (VPN/IP allowlist).
+Controls: Centralize logs, alerts for anomalies, retain immutable logs
 
-Harden configurations and remove verbose error messages.
+</details>
+🔑 Key Flags
 
-🟢 Task 20 – Cross‑Site Scripting (XSS) — DOM / Reflected / Stored
+Darren: fe86079416a21a3c99937fea8874b667
 
-XSS happens when user input is included in pages without proper encoding.
+Arthur: d9ac0f7db4fda460ac3edeb75d75e16e
 
-Reflected XSS example (simple popup):
+Admin: THM{Yzc2YjdkMjE5N2VjMzNhOTE3NjdiMjdl}
 
-```<script>alert("Hello")</script>```
+IDOR: flag{fivefourthree}
 
+Default creds: thm{4b9513968fd564a87b28aa1f9d672e17}
 
-Reflected challenge tokens:
+Cookie flags: THM{good_old_base64_huh}, THM{heres_the_admin_flag}
 
-Popup with "Hello" → ThereIsMoreToXSSThanYouThink
+RCE: 4a69a7ff9fd68
 
-Popup with machine IP → ReflectiveXss4TheWin
+✅ Lessons Learned
 
-Stored XSS example (comment containing script):
-```
-<!-- comment input -->
-<script>
-  alert(document.cookie);
-</script>
-```
+Never trust user input — validate, normalize, sanitize
 
-Stored challenge tokens / results:
+Protect sensitive files — move DBs outside web root, enforce permissions
 
-Insert raw HTML tags → HTML_T4gs
+Use modern crypto — salted hashes (bcrypt/Argon2)
 
-alert(document.cookie) popup → W3LL_D0N3_LVL2
+Keep components updated — monitor CVEs, patch promptly
 
-Page title changed to "I am a hacker" via injected JS → websites_can_be_easily_defaced_with_xss
+Harden XML parsing — disable DTD/external entities, use secure parsers
 
-Remediation:
+Log & monitor — centralize, alert on anomalies
 
-Context-aware output encoding/escaping (HTML, attribute, JS, URL contexts).
+Apply least privilege — minimize web service permissions
 
-Use Content Security Policy (CSP).
+🛠️ Practical Remediation Checklist
 
-Set cookies to HttpOnly and Secure; sanitize inputs where appropriate.
+Trim & normalize inputs server-side
 
-🟢 Task 21 – Insecure Deserialization — Overview / Quiz
+Move DB files outside web root; restrict permissions
 
-Insecure deserialization: untrusted serialized data is deserialized and abused to alter logic, crash services, or achieve RCE.
+Enforce password policies, rate limits, MFA
 
-Risks:
+Disable XML external entities; use safe parsing libraries
 
-Denial of Service (crash services)
+Sign/verify cookies; avoid client-side serialized objects
 
-Remote Code Execution (language/framework dependent)
+Apply CSP; context-aware escaping for XSS
 
-Business-logic tampering
+Maintain SBOM; automate patching; monitor for known CVEs
 
-Quiz answers:
-
-Who developed Tomcat? → The Apache Software Foundation
-
-Attack that can crash services via insecure deserialization? → Denial of Service
-
-Remediation:
-
-Avoid deserializing untrusted data; prefer safe formats (JSON) with strict parsing.
-
-Use integrity checks (signatures/MACs) on serialized blobs.
-
-Apply least privilege to deserialization contexts and monitor for anomalies.
-
-🟢 Task 22 – Insecure Deserialization: Objects
-
-Objects in programming (OOP) consist of:
-
-State → Attributes or properties
-
-Behaviour → Methods or actions
-
-Example: A lamp object can have a type of bulb (state) and can be turned on/off (behaviour). Methods allow changing state or behaviour without rewriting the code.
-
-Quiz answer:
-
-If a dog was sleeping, is this State or Behaviour? → Behaviour ✅
-
-🟢 Task 23 – Insecure Deserialization: Serialization/Deserialization
-
-Serialization converts objects into simpler, transportable formats (e.g., binary) to send between systems.
-Deserialization converts that simple data back into an object the application can process.
-
-Example analogy: Drawing a map for a tourist → serialized info; tourist interprets it → deserialized info.
-
-Quiz answer:
-
-What base-2 format is used to transmit data across networks? → Binary ✅
-
-Insecure deserialization: Occurs when untrusted data is deserialized without validation, allowing execution of malicious payloads.
-
-🟢 Task 24 – Insecure Deserialization: Cookies
-
-Cookies 101:
-
-Tiny pieces of data stored in the browser by websites.
-
-Can store session IDs, user preferences, login info, etc.
-
-Some cookies expire on browser close; others persist via the Expiry attribute.
-
-Cookie attributes:
-
-Attribute	Description	Required?
-Name	Cookie identifier	Yes
-Value	Content (plaintext or encoded)	Yes
-Secure	Sent only over HTTPS	No
-Expiry	Auto-delete timestamp	No
-Path	URL scope for the cookie	No
-
-Example (Python Flask):
-
-```
-from flask import Flask, make_response
-from datetime import datetime
-
-app = Flask(__name__)
-
-@app.route('/')
-def set_cookie():
-    timestamp = datetime.now().isoformat()
-    resp = make_response("Cookie Set")
-    resp.set_cookie("registrationTimestamp", timestamp)
-    return resp
-
-```
-
-Quiz answers:
-
-Cookie path /login → user visits webapp.com/login ✅
-
-Secure cookies work over → HTTPS ✅
-
-🟢 Task 25 – Insecure Deserialization: Cookies Practical
-
-Steps:
-
-Open http://MACHINE_IP in browser and create an account.
-
-Inspect cookies via browser developer tools (Storage tab).
-
-Observe encoded and base64 cookies; the first flag is inside a cookie.
-
-Modify userType cookie from user → admin.
-
-Navigate to http://MACHINE_IP/admin for second flag.
-
-Flags obtained:
-
-1st cookie flag → THM{good_old_base64_huh} ✅
-
-Admin dashboard flag → THM{heres_the_admin_flag} ✅
-
-🟢 Task 26 – Insecure Deserialization: Code Execution
-
-Setup / Exploit:
-
-Change userType cookie back to user.
-
-Visit feedback forms (“Exchange your vim” → “Provide your feedback”).
-
-Flask app deserializes the encoded cookie using pickle.loads, trusting the user data.
-
-Prepare a Python payload (rce.py) with base64-encoded reverse shell commands.
-
-Run netcat listener on your Kali machine.
-
-Paste the encoded payload into the encodedPayload cookie.
-
-Refresh page → receive reverse shell to VM.
-
-Flag found in flag.txt:
-
-```4a69a7ff9fd68```
-
-
-Remediation:
-
-Never deserialize untrusted input.
-
-Use signed or validated serialized data.
-
-Restrict execution context and permissions for deserialization.
-
-🟢 Task 27 – Components With Known Vulnerabilities: Intro
-
-Many systems use software with well-known vulnerabilities (e.g., outdated WordPress). Attackers can find exploits with minimal effort.
-
-Key points:
-
-Prevalence is high; easy for companies to miss updates.
-
-Exploit-db and security advisories can be used to research existing vulnerabilities.
-
-No quiz answer required. ✅
-
-🟢 Task 28 – Components With Known Vulnerabilities: Exploit
-
-Example: Nostromo 1.9.6 web server.
-
-Steps:
-
-Identify server software & version → Nostromo 1.9.6.
-
-Research exploits on exploit-db for that version.
-
-Download and review the exploit script. Modify minor issues if necessary (e.g., comment out buggy lines).
-
-Execute script → achieve RCE.
-
-Lessons learned:
-
-Known vulnerabilities save attackers time; always check software versions.
-
-Reading and understanding the exploit code helps tailor it to your target.
-
-Version enumeration + exploit-db research is a critical skill for penetration testers.
-
-No quiz answer required. ✅
-
-🟢 Task 29 – Components With Known Vulnerabilities: Lab
-
-This lab is a practical exercise in finding and using a public exploit for a purposely vulnerable application. All information required (vulnerable app name/version and exploit) can be discovered via public sources (exploit-db, GitHub, vendor advisories, etc.).
-Tip from the task: when running exploit scripts that accept arguments, quote your inputs (e.g. "id").
-
-What I did:
-
-Enumerated the service to identify the software and version.
-
-Located the matching exploit script online.
-
-Carefully reviewed the script, quoted input arguments as instructed, and executed it against the VM.
-
-Useful command (to count characters in a file on the target once you have shell access):
-```
-wc -c /etc/passwd
-# -> 1611
-```
-
-Result:
-
-Number of characters in /etc/passwd:
-
-```1611```
-
-
-Remediation:
-
-Keep third‑party components up to date; apply vendor patches promptly.
-
-Maintain an inventory of components (SBOM) and monitor for known CVEs.
-
-Restrict exposure of vulnerable services (network ACLs, firewalls) and segment critical assets.
-
-🟢 Task 30 – Insufficient Logging & Monitoring
-
-This task explains why thorough logging and active monitoring are critical for detecting/responding to incidents.
-
-Key logging recommendations (minimum fields to capture):
-
-HTTP status codes
-
-Time stamps (with timezone)
-
-Usernames / authenticated identifiers
-
-API endpoints / requested URLs
-
-Source IP addresses
-
-User-Agent and other headers useful for detecting automation
-
-What I did (log analysis exercise):
-
-Inspected provided sample logs and located anomalous behavior.
-
-Identified the attacker IP:
-
-```49.99.13.16```
-
-
-Classified the activity: Brute Force (repeated authentication attempts / repeated requests to login endpoints).
-
-Why this matters:
-
-Without logs, you cannot reconstruct an attacker’s actions or determine scope of compromise.
-
-Without monitoring/alerting on high‑impact signals (multiple failed logins, logins from unusual IPs, known bad user-agents), intrusions can go unnoticed for long periods.
-
-Remediations & controls:
-
-Centralize logs (SIEM or log aggregator), protect log integrity and retention.
-
-Create alerts for high‑severity patterns: multiple failed logins, rapid request rates, access from anomalous geolocations, and known exploit signatures.
-
-Maintain separate, immutable copies of logs for incident response and compliance.
-
-Apply rate limits, account lockout policies, and multi-factor authentication to reduce brute-force risk.
+Centralize logs; alert on anomalies; retain immutable copies
