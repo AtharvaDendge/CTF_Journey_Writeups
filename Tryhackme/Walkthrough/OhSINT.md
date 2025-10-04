@@ -26,8 +26,7 @@
 
 ### Step 1: Inspecting the Image
 We start by examining the downloaded image to see if it contains any hidden metadata.
-
-'''
+```
 exiftool image.jpg
-'''
+```
 
