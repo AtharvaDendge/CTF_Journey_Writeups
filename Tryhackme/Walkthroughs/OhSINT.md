@@ -86,11 +86,14 @@ What site did you find his email address on?	Github
 Where has he gone on holiday?	New York
 What is the person's password?	pennYDr0pper.!
 
+
 ## 👨‍💻 Author
 
-Write-up by: Atharva Dendge
+### Atharva Balasaheb Dendge
 
-Platform: TryHackMe – OhSINT Room
+•	GitHub: https://github.com/AtharvaDendge
+
+•	LinkedIn: https://www.linkedin.com/in/atharva-balasaheb-dendge/
 
 #### This write-up is created for educational and learning purposes to demonstrate OSINT methodology.
 
