@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" alt="Shodan Logo" src="https://tryhackme-images.s3.amazonaws.com/room-icons/995f80e68816165b201d93afe7703776.png" />
+  <img width="400" alt="Shodan Logo" src="https://www.shodan.io/static/img/logo-6abcc86b.png" />
 </p>
 
 <h1 align="center">Room: Shodan</h1>
