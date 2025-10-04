@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" height="400" alt="image" src="https://tryhackme-images.s3.amazonaws.com/room-icons/99d3424920a0302aa1fda92e365999b8.png" />
+  <img width="400" height="400" alt="image" src="hhttps://owasp.org/Top10/assets/TOP_10_logo_Final_Logo_Colour.png" />
 </p>
 <h1 align="center">Room: Owasp Top 10</h1>
 
