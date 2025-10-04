@@ -59,7 +59,7 @@ This room covers the OWASP Top 10 vulnerabilities. Each module includes:
 ## 🚀 Exploitation Walkthrough
 
 <details>
-<summary>🟣 Task 3 — Injection (Theory)</summary>
+ 🟣 Task 3 — Injection (Theory)</summary>
 
 - **What it is:** User input interpreted as code/queries (SQL, OS, LDAP, etc.).  
 - **Learned:** SQL Injection vs OS Command Injection fundamentals.  
@@ -72,7 +72,7 @@ This room covers the OWASP Top 10 vulnerabilities. Each module includes:
 </details>
 
 <details>
-<summary>🟣 Task 4 — OS Command Injection (Theory)</summary>
+ 🟣 Task 4 — OS Command Injection (Theory)</summary>
 
 - **Cause:** Server passes unsanitized input into system calls (`system()`, `exec`).  
 - **Risk:** Arbitrary command execution, remote shells, data exfiltration.  
@@ -80,7 +80,7 @@ This room covers the OWASP Top 10 vulnerabilities. Each module includes:
 </details>
 
 <details>
-<summary>🟢 Task 5 — Command Injection (Practical)</summary>
+ 🟢 Task 5 — Command Injection (Practical)</summary>
 
 - **Target:** `http://MACHINE_IP/evilshell.php`  
 - **Behavior:** Command output is rendered in the browser (interactive).
@@ -95,7 +95,7 @@ ls /                  # -> found drpepper.txt
 cat /etc/motd         # -> "Dr Pepper" (fun MOTD)
 ```
 <details>
-<summary>🟢 Task 5 — Command Injection (Practical) — Key Findings</summary>
+ 🟢 Task 5 — Command Injection (Practical) — Key Findings</summary>
 
 **Key findings:**
 - Strange file in `/`: `drpepper.txt`
@@ -106,7 +106,7 @@ cat /etc/motd         # -> "Dr Pepper" (fun MOTD)
 </details>
 
 <details>
-<summary>🟠 Task 6 — Broken Authentication (Theory)</summary>
+ 🟠 Task 6 — Broken Authentication (Theory)</summary>
 
 **What it enables:**
 - Exploiting weak/guessable passwords
@@ -120,7 +120,7 @@ cat /etc/motd         # -> "Dr Pepper" (fun MOTD)
 </details>
 
 <details>
-<summary>🟠 Task 7 — Broken Authentication (Practical)</summary>
+ 🟠 Task 7 — Broken Authentication (Practical)</summary>
 
 **Vulnerability:** Registration logic failure — leading/trailing whitespace not normalized.
 
@@ -136,7 +136,7 @@ cat /etc/motd         # -> "Dr Pepper" (fun MOTD)
 </details>
 
 <details>
-<summary>🟠 Task 8 — Sensitive Data Exposure (Intro)</summary>
+ 🟠 Task 8 — Sensitive Data Exposure (Intro)</summary>
 
 **Definition:** Application unintentionally exposes sensitive data (names, DoB, passwords, CC numbers, etc.).  
 
@@ -161,7 +161,7 @@ SELECT * FROM users;
 ```
 
 <details>
-<summary>🟠 Task 10 — Cracking Weak Hashes</summary>
+ 🟠 Task 10 — Cracking Weak Hashes</summary>
 
 **Issue:** Passwords stored as weak MD5 hashes.  
 
@@ -186,7 +186,7 @@ THM{Yzc2YjdkMjE5N2VjMzNhOTE3NjdiMjdl}
 ```
 
 <details>
-<summary>🟠 Takeaway — Sensitive Data Exposure</summary>
+ 🟠 Takeaway — Sensitive Data Exposure</summary>
 
 **Key Takeaways:**
 - 🚫 Don’t place DB files under web-accessible directories  
@@ -195,7 +195,7 @@ THM{Yzc2YjdkMjE5N2VjMzNhOTE3NjdiMjdl}
 </details>
 
 <details>
-<summary>🟢 Task 12 — XML External Entity (XXE) Intro</summary>
+ 🟢 Task 12 — XML External Entity (XXE) Intro</summary>
 
 - **XXE:** XML External Entity — abusing XML parsers to read local files, SSRF, DoS, or RCE  
 - **Types:**  
@@ -204,7 +204,7 @@ THM{Yzc2YjdkMjE5N2VjMzNhOTE3NjdiMjdl}
 </details>
 
 <details>
-<summary>🟢 Task 13 — Understanding XML</summary>
+ 🟢 Task 13 — Understanding XML</summary>
 
 - Case-sensitive, requires one root element  
 - Recommended prolog:
@@ -221,7 +221,7 @@ THM{Yzc2YjdkMjE5N2VjMzNhOTE3NjdiMjdl}
 </details>
 
 <details>
-<summary>🟢 Task 15 — XXE Payloads</summary>
+ 🟢 Task 15 — XXE Payloads</summary>
 
 **Entity substitution example:**
 ```
@@ -246,7 +246,7 @@ Validate XML input
 
 Run web processes with least privilege
 
-</details> <details> <summary>🟢 Task 17 — Broken Access Control</summary>
+</details> <details>  🟢 Task 17 — Broken Access Control</summary>
 
 Missing server-side authorization allows access to unauthorized resources
 
@@ -254,7 +254,7 @@ Exploit: Force-browsing protected URLs or manipulating object IDs
 
 Mitigation: Server-side authorization checks, deny-by-default, RBAC
 
-</details> <details> <summary>🟢 Task 18 — IDOR (Challenge)</summary>
+</details> <details>  🟢 Task 18 — IDOR (Challenge)</summary>
 
 Pattern: Enumerate object IDs to access other users’ data
 
@@ -264,7 +264,7 @@ Flag: flag{fivefourthree}
 
 Fix: Verify ownership server-side; use opaque IDs
 
-</details> <details> <summary>🟢 Task 19 — Security Misconfiguration</summary>
+</details> <details>  🟢 Task 19 — Security Misconfiguration</summary>
 
 Scan for admin panels → try default credentials → gain access
 
@@ -272,7 +272,7 @@ Flag: thm{4b9513968fd564a87b28aa1f9d672e17}
 
 Fixes: Change all default credentials, remove unused services, restrict admin access
 
-</details> <details> <summary>🟢 Task 20 — Cross-Site Scripting (XSS)</summary>
+</details> <details>  🟢 Task 20 — Cross-Site Scripting (XSS)</summary>
 
 Types: Reflected, Stored, DOM-based
 
@@ -286,7 +286,7 @@ Page title defacement: websites_can_be_easily_defaced_with_xss
 
 Mitigation: Context-aware output encoding, CSP, HttpOnly + Secure cookies, sanitize inputs
 
-</details> <details> <summary>🟢 Tasks 21-26 — Insecure Deserialization</summary>
+</details> <details>  🟢 Tasks 21-26 — Insecure Deserialization</summary>
 
 Risk: Deserializing untrusted data → DoS, logic tampering, RCE
 
@@ -302,13 +302,13 @@ RCE flag: 4a69a7ff9fd68
 
 Mitigation: Sign/validate serialized data; restrict privileges
 
-</details> <details> <summary>🟢 Tasks 27-29 — Components with Known Vulnerabilities</summary>
+</details> <details>  🟢 Tasks 27-29 — Components with Known Vulnerabilities</summary>
 
 Identify software version → search exploits → adapt → execute → RCE
 
 Lesson: Maintain SBOM, patch promptly, isolate vulnerable components
 
-</details> <details> <summary>🟢 Task 30 — Insufficient Logging & Monitoring</summary>
+</details> <details>  🟢 Task 30 — Insufficient Logging & Monitoring</summary>
 
 Proper logging is essential for incident detection and response
 
