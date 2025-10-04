@@ -1,4 +1,18 @@
+<p align="center">
+  <img width="400" height="400" alt="image" src="https://tryhackme-images.s3.amazonaws.com/room-icons/99d3424920a0302aa1fda92e365999b8.png" />
+</p>
+<h1 align="center">Room: Owasp Top 10</h1>
 
+## 🏷️ Challenge Information
+- **Title**: Owasp Top 10
+- **Platform**: TryHackMe
+- **Tags**: Web Security, OWASP, Injection, Authentication, Enumeration
+- **Difficulty**: Easy
+
+________________________________________
+📝 Description
+
+This is a machine that allows you to practise web app hacking and privilege escalation
 📝 Overview
 
 This room covers the OWASP Top 10 vulnerabilities.
