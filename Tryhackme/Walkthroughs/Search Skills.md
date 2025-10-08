@@ -13,7 +13,6 @@ Difficulty: Easy
 ---
 
 ## 🚀 Starting Point
-
 👉 This is the point where the actual OSINT methodology begins.
 
 ---
