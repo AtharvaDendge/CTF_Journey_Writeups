@@ -32,7 +32,42 @@ Focus areas:
 
 * Example: Google search for “learn hacking” returns ~1.5 billion results.
 
-✅ No answers required here.## 👨‍💻 Author
+✅ No answers required here.
+
+---
+
+## 🧩 Task 2: Evaluation of Search Results
+
+When evaluating online info:
+
+Source → Author/organization credibility
+
+Evidence & Reasoning → Look for factual, logical claims
+
+Objectivity & Bias → Avoid agenda-driven posts
+
+Corroboration & Consistency → Cross-check with other trusted sources
+
+### Q & A
+
+Q: What do you call a cryptographic method or product considered bogus or fraudulent?
+A: Snake oil
+
+Q: What is the name of the command replacing netstat in Linux?
+A: ss
+
+
+
+
+
+
+
+
+
+
+
+
+## 👨‍💻 Author
 
 ### Atharva Balasaheb Dendge
 
