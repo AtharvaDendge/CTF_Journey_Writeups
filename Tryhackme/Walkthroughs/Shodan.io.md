@@ -14,12 +14,6 @@
 
 ---
 
-## ⚙️ Initial Setup
-1. **Join the Room** → Click on the green `Join` button.  
-2. **Start the Machine** → Launch the room machine from TryHackMe.
-   
----
-
 ## 🚀 Starting Point
 After joining we’re ready to start **reconnaissance and exploration** using **Shodan.io**.  
 This is the point where the *actual pentesting / OSINT investigation begins*.
@@ -170,7 +164,5 @@ Basic vulnerability info
 •	GitHub: https://github.com/AtharvaDendge
 
 •	LinkedIn: https://www.linkedin.com/in/atharva-balasaheb-dendge/
-
-#### This write-up is created for educational and learning purposes to demonstrate OSINT methodology.
 
 
