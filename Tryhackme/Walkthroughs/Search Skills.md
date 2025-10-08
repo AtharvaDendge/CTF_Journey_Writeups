@@ -48,16 +48,37 @@ Objectivity & Bias → Avoid agenda-driven posts
 
 Corroboration & Consistency → Cross-check with other trusted sources
 
-### Q & A
+#### Q & A
 
 Q: What do you call a cryptographic method or product considered bogus or fraudulent?
+
 ```Snake oil```
 
 Q: What is the name of the command replacing netstat in Linux?
+
 ```ss```
 
+---
 
+## 🔎 Task 3: Search Engines & Operators
 
+#### Key Google operators:
+
+Operator	Purpose	Example
+" "	Exact phrase search	"passive reconnaissance"
+site:	Limit to a specific domain	site:tryhackme.com success
+-	Exclude a term	pyramids -tourism
+filetype:	Find documents of a specific type	filetype:ppt cyber security
+
+#### Q & A
+
+Q: Limit Google search to PDF files containing “cyber warfare report”
+
+```filetype:pdf cyber warfare report```
+
+Q: The Linux command ss stands for
+
+```socket statistics```
 
 
 
