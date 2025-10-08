@@ -1,29 +1,41 @@
-🔎 TryHackMe – Search Skills Walkthrough
+<p align="center"> <img width="400" alt="Search Skills Banner" src="https://tryhackme-images.s3.amazonaws.com/room-icons/5f04259cf9bf5b57aed2c476-1718102661617" /> </p> <h1 align="center">Room: Search Skills</h1>
+## 🏷️ Challenge Information
 
-Room Link: Search Skills on TryHackMe
+Title: Search Skills
+
+Platform: TryHackMe
+
+Category: OSINT / Recon
 
 Difficulty: Easy
-Skills Covered: OSINT, Search Operators, Specialized Search Engines, CVE Research, Documentation Usage
 
-📘 Task 1 – Introduction
+## 🚀 Starting Point
 
-The Internet is flooded with information.
+After joining the room and connecting to the TryHackMe VPN, we’re ready to start exploring search operators, specialized engines, and documentation skills.
+👉 This is the point where the actual OSINT methodology begins.
 
-To be an effective cybersecurity professional, we must search smartly rather than drown in data.
+🕵️ Task 1: Introduction
 
-Goal of this lesson:
+The internet is flooded with information. As security professionals we must search smartly, not blindly.
 
-Evaluate information sources
+Focus areas:
+
+Evaluate credibility of sources
 
 Use search engines efficiently
 
-Explore specialized search engines
+Explore specialized OSINT search engines
 
 Read technical documentation
 
-Use social media & news outlets
+Utilize social media & news outlets
 
-Example:
-A Google search for “learn hacking” returned over 1.5 billion results.
+Example: Google search for “learn hacking” returns ~1.5 billion results.
 
-✅ No answer required in this task.
+✅ No answers required here.## 👨‍💻 Author
+
+### Atharva Balasaheb Dendge
+
+•	GitHub: https://github.com/AtharvaDendge
+
+•	LinkedIn: https://www.linkedin.com/in/atharva-balasaheb-dendge/
