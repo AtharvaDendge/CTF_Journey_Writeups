@@ -1,4 +1,5 @@
 <p align="center"> <img width="400" alt="Search Skills Banner" src="https://tryhackme-images.s3.amazonaws.com/room-icons/5f04259cf9bf5b57aed2c476-1718102661617" /> </p> <h1 align="center">Room: Search Skills</h1>
+
 ## 🏷️ Challenge Information
 
 Title: Search Skills
@@ -11,26 +12,25 @@ Difficulty: Easy
 
 ## 🚀 Starting Point
 
-After joining the room and connecting to the TryHackMe VPN, we’re ready to start exploring search operators, specialized engines, and documentation skills.
 👉 This is the point where the actual OSINT methodology begins.
 
-🕵️ Task 1: Introduction
+## 🕵️ Task 1: Introduction
 
 The internet is flooded with information. As security professionals we must search smartly, not blindly.
 
 Focus areas:
 
-Evaluate credibility of sources
+* Evaluate credibility of sources
 
-Use search engines efficiently
+* Use search engines efficiently
 
-Explore specialized OSINT search engines
+* Explore specialized OSINT search engines
 
-Read technical documentation
+* Read technical documentation
 
-Utilize social media & news outlets
+* Utilize social media & news outlets
 
-Example: Google search for “learn hacking” returns ~1.5 billion results.
+* Example: Google search for “learn hacking” returns ~1.5 billion results.
 
 ✅ No answers required here.## 👨‍💻 Author
 
