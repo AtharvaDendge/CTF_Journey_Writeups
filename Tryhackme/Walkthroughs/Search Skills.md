@@ -80,13 +80,97 @@ Q: The Linux command ss stands for
 
 ```socket statistics```
 
+## 🌐 Task 4: Specialized Search Engines
 
+Famous OSINT engines:
 
+Shodan → Finds internet-connected devices
 
+Censys → Discovers hosts, domains, certificates
 
+VirusTotal → Scans files/URLs with 60+ AV engines
 
+Have I Been Pwned → Checks if email appeared in breaches
 
+#### Q & A
 
+Q: Top country with lighttpd servers
+
+```United States```
+
+Q: BitDefenderFalx detects file with given hash as
+
+```Android.Riskware.Agent.LHH```
+
+## ⚙️ Task 5: Vulnerabilities & Exploits
+
+CVE → Unique ID for each vulnerability (e.g., CVE-2014-0160 = Heartbleed).
+
+Exploit-DB → Exploit & PoC code repository.
+
+GitHub → Hosts PoCs, research tools, scripts.
+
+#### Q & A
+
+Q: CVE-2024-3094 refers to
+
+```xz```
+
+## 📄 Task 6: Technical Documentation
+
+Always prefer official docs:
+
+Linux man pages:
+man ip → press q to quit
+
+Windows Docs:
+Search ipconfig in Microsoft Docs
+
+Product Docs:
+(e.g., Snort, Apache HTTPD, PHP, Node.js)
+
+#### Q & A
+
+Q: The Linux command cat stands for
+
+```concatenate```
+
+Q: Netstat parameter in Windows showing executable for each connection
+
+```-b```
+
+## 📱 Task 7: Social Media & News
+
+OSINT sources also include:
+
+LinkedIn / Twitter / Facebook → Find technical background & overshared personal info
+
+Cybersecurity News Sites → e.g., The Hacker News, BleepingComputer, DarkReading
+
+#### Q & A
+
+Q: Popular social media to learn technical background of employees
+
+```LinkedIn```
+
+Q: Platform to find personal info like childhood school
+
+```Facebook```
+
+## 🏁 Task 8: Conclusion
+
+We explored the essential OSINT skills:
+
+Effective searching and filtering
+
+Validating source credibility
+
+Leveraging specialized engines & official docs
+
+Staying updated via social media & news outlets
+
+By consistently applying these techniques, a cybersecurity professional can efficiently discover reliable, actionable intelligence.
+---
 
 ## 👨‍💻 Author
 
