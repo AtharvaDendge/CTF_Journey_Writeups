@@ -51,10 +51,10 @@ Corroboration & Consistency → Cross-check with other trusted sources
 ### Q & A
 
 Q: What do you call a cryptographic method or product considered bogus or fraudulent?
-A: Snake oil
+```Snake oil```
 
 Q: What is the name of the command replacing netstat in Linux?
-A: ss
+```ss```
 
 
 
